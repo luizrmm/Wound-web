@@ -1,0 +1,25 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}"/>
+  <title>imagem</title>
+</head>
+  <body>
+    <section>
+      <div id="drawingTools">
+        <div id="otherTools">
+          <button id="openFile" onclick="triggerClick()">Abrir</button>
+          <button id="iniciar" onclick="changeColor('red')">Contornar</button>
+          <button id="calibrate">Calibrar</button>
+          <button id="clearCanvas" onclick="clearCanvas()">Limpar</button>
+        </div>
+
+      </div>
+      <canvas id="canvas" width="800" height="500" ondblclick="pegaPosicaoMouse(event)"></canvas>
+      <input id="file" type="file" accept="image/*"/>
+    </section>
+    <script type="text/javascript" src="{% static 'js/calculateArea.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/paint.js' %}"></script>
+  </body>
+</html>
