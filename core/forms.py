@@ -1,6 +1,27 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
+from .models import Animal, RacaAnimal, SexoAnimal
+from django.forms import ModelForm
+
+class AnimalForm(ModelForm):
+
+    class Meta:
+        model = Animal
+        fields = [
+            'nome_animal',
+            'numeracao_animal',
+            'peso_animal',
+            'idade_animal',
+            'raca_animal',
+            'sexo_animal'
+        ]
+
+        error_messages = {
+            'numeracao_animal': {
+                'unique': 'Numeração já existente'
+            },
+        }
 
 class RegistrationForm (UserCreationForm):
     email = forms.EmailField(required=True)

@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .forms import RegistrationForm
+from .forms import RegistrationForm, AnimalForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout, authenticate, login
 
@@ -19,6 +19,15 @@ def cadastro(request):
 		form.save()
 		return redirect('home')
 	return render(request, 'cadastro.html', {'form': form})
+
+#view que cadastras animais
+@login_required
+def cadastroAnimais(request):
+	form = AnimalForm(request.POST or None)
+	if form.is_valid():
+		form.save()
+		return redirect('home')
+	return render(request, 'cad_animal.html', {'form': form})
 
 #view de login
 def my_login(request):

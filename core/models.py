@@ -39,4 +39,10 @@ class Animal(models.Model):
     def __str__(self):
         return self.nome_animal
 
+class MedidaImagem(models.Model):
+    data_medida = models.DateField()
+    medida_obtida = models.DecimalField(max_digits=5, decimal_places=2)
+    animal_da_medida = models.OneToOneField(Animal, on_delete=models.PROTECT)
 
+    def __str__(self):
+        return self.data_medida
