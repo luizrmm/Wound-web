@@ -3,22 +3,36 @@
 <html>
 <head>
   <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}"/>
+  <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" />
+  <link href="{% static 'css/ct-paper.css' %}" rel="stylesheet"/>
+  <link href="{% static 'css/demo.css' %}" rel="stylesheet" /> 
+  <link href="{% static 'css/examples.css' %}" rel="stylesheet" /> 
+      
+  <!--     Fonts and icons     -->
+
+
   <title>imagem</title>
 </head>
   <body>
-    <section>
+    <div id="teste">
       <div id="drawingTools">
         <div id="otherTools">
-          <button id="openFile" onclick="triggerClick()">Abrir</button>
-          <button id="iniciar" onclick="changeColor('red')">Contornar</button>
-          <button id="calibrate">Calibrar</button>
-          <button id="clearCanvas" onclick="clearCanvas()">Limpar</button>
+          <button class="btn btn-default" id="openFile" onclick="triggerClick()">Abrir</button>
+          <button class="btn btn-default" id="iniciar" onclick="changeColor('red')">Contornar</button>
+          <button class="btn btn-default" id="calibrate">Calibrar</button>
+          <button class="btn btn-default" id="clearCanvas" onclick="clearCanvas()">Limpar</button>
+          <a class="btn btn-default" id="downloadLnk" download="imagem.png">Salvar imagem</a>
+          <a href="{% url 'cadastro_medida' %}" class="btn">Salvar Medida</a>
         </div>
-
       </div>
-      <canvas id="canvas" width="800" height="500" ondblclick="pegaPosicaoMouse(event)"></canvas>
+
+        <canvas id="canvas" width="800" height="500" ondblclick="pegaPosicaoMouse(event)"></canvas>
+        
+        
+        
       <input id="file" type="file" accept="image/*"/>
-    </section>
+    </div>
+     
     <script type="text/javascript" src="{% static 'js/calculateArea.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/paint.js' %}"></script>
   </body>

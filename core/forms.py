@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-from .models import Animal, RacaAnimal, SexoAnimal
+from .models import Animal, RacaAnimal, SexoAnimal,MedidaImagem
 from django.forms import ModelForm
 
 class AnimalForm(ModelForm):
@@ -21,6 +21,21 @@ class AnimalForm(ModelForm):
             'numeracao_animal': {
                 'unique': 'Numeração já existente'
             },
+        }
+class MedidaImagemForm(ModelForm):
+    
+    class Meta:
+        model = MedidaImagem
+        fields = [
+            'codigo_medida',
+            'data_medida',
+            'image',
+            'medida_obtida',
+            'animal_da_medida'
+        ]
+
+        widgets = {
+            'data_medida': forms.TextInput(attrs={'class': 'datepicker'})
         }
 
 class RegistrationForm (UserCreationForm):

@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .forms import RegistrationForm, AnimalForm
+from .forms import RegistrationForm, AnimalForm, MedidaImagemForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout, authenticate, login
 
@@ -28,6 +28,14 @@ def cadastroAnimais(request):
 		form.save()
 		return redirect('home')
 	return render(request, 'cad_animal.html', {'form': form})
+
+@login_required
+def cadastroMedida(request):
+    form = MedidaImagemForm(request.POST or None, request.FILES or None)
+    if form.is_valid():
+        form.save()
+        return redirect('paint_image')
+    return render(request, 'cadastro_medida.html', {'form': form})
 
 #view de login
 def my_login(request):

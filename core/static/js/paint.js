@@ -38,6 +38,7 @@ document.getElementById('file').addEventListener('change', function(e)
 	var temp = URL.createObjectURL(e.target.files[0]);
 	var image = new Image();
 	image.src = temp;
+	console.log(image)
 
 	image.addEventListener('load', function()
 	{

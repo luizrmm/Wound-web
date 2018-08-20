@@ -1,31 +1,27 @@
 * { margin: 0; padding: 0; }
 
-section 
+#teste
 {
 	
 	padding-top: 20px;
 	padding-bottom: 20px; 
 }
 
-canvas
+#canvas
 {
 	display: block;
-	border: 1px solid black;
+	border: 2px solid black;
 	margin: 10px auto 0px;
-}
-
-button
-{
-	outline: 0;
-	border: 0;
 }
 
 #drawingTools
 {
 	
-	width: 800px;
+	width: 100%;
 	height: 95px;
-	margin: 0px auto;
+	display: block;
+	margin-left: 250px;
+	margin-right: auto;
 }
 
 #otherTools
@@ -37,18 +33,7 @@ button
 
 #otherTools button
 {
-	width: 24%;
-	border-radius: 20px;
-	height: 50px;
-	margin: 3px;
-	margin-top: 15px;
-	background: #303030;
-	color: white;
-	cursor: pointer;
-	float: left;
-	font-size: 25px;
-	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
-
+	width: 140px;
 }
-#otherTools button:hover {opacity: 0.5}
+
 #file { opacity: 0; }

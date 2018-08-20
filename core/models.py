@@ -1,23 +1,15 @@
 from django.db import models
-from django.contrib.auth.models import User
-from django.db.models.signals import post_save
 
-class UserProfile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    descricao = models.CharField(max_length=100, default='')
-    phone = models.IntegerField(default=0)
-
-def create_profile(sender, **kwargs):
-    if kwargs['created']:
-        user_profile = UserProfile.objects.create(user=kwargs['instance'])
-post_save.connect(create_profile, sender=User)
-
+#classe que representa a raça do animal
 class RacaAnimal(models.Model):
     nome_raca = models.CharField(max_length=50)
 
     def __str__(self):
         return self.nome_raca
+    class Meta:
+        verbose_name_plural = 'Raças'
 
+#classe que representa o sexo do animal
 class SexoAnimal(models.Model):
     SEX_CHOICES = (
         ('F', 'Fêmea'),
@@ -25,9 +17,13 @@ class SexoAnimal(models.Model):
     )
     sex = models.CharField(max_length=1,choices=SEX_CHOICES)
 
+    class Meta:
+        verbose_name_plural = 'Sexo'
+
     def __str__(self):
         return self.sex
 
+#classe que representa o animal
 class Animal(models.Model):
     nome_animal = models.CharField(max_length=50)
     numeracao_animal = models.IntegerField(unique=True)
@@ -36,13 +32,24 @@ class Animal(models.Model):
     raca_animal = models.ForeignKey(RacaAnimal, null=True, blank=True, on_delete=models.PROTECT)
     sexo_animal = models.ForeignKey(SexoAnimal, null=True, blank=True, on_delete=models.PROTECT)
 
+    class Meta:
+        verbose_name_plural = 'Animais'
+
     def __str__(self):
         return self.nome_animal
 
+
+# classe que representa a medida da obtida de casa imagem
+
 class MedidaImagem(models.Model):
+    codigo_medida = models.CharField(max_length=50, default='')
     data_medida = models.DateField()
+    image = models.ImageField(upload_to='imagens_medidas', blank=True)
     medida_obtida = models.DecimalField(max_digits=5, decimal_places=2)
-    animal_da_medida = models.OneToOneField(Animal, on_delete=models.PROTECT)
+    animal_da_medida = models.ForeignKey(Animal, on_delete=models.PROTECT)
+
+    class Meta:
+        verbose_name_plural = "Medida Imagens"
 
     def __str__(self):
-        return self.data_medida
+        return 'codigo: ' + self.codigo_medida

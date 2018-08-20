@@ -71,3 +71,10 @@ function pegaPosicaoMouse(event) {
 	pintar(pos_x, pos_y)
 	
 }
+
+function download() {
+    var dt = canvas.toDataURL('image/png');
+	this.href = dt;
+	console.log(dt)
+};
+downloadLnk.addEventListener('click', download, false);
