@@ -1,7 +1,11 @@
 from django.contrib import admin
-from .models import RacaAnimal, SexoAnimal, Animal, MedidaImagem
+from .models import Equino, Bovino, SexoAnimal, MedidaBovino, MedidaEquino, RacaBovino, RacaEquino, TipoFerida
 
-admin.site.register(RacaAnimal)
+admin.site.register(RacaEquino)
+admin.site.register(RacaBovino)
 admin.site.register(SexoAnimal)
-admin.site.register(Animal)
-admin.site.register(MedidaImagem)
+admin.site.register(Bovino)
+admin.site.register(Equino)
+admin.site.register(MedidaBovino)
+admin.site.register(MedidaEquino)
+admin.site.register(TipoFerida)

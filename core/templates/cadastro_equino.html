@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Cadastro de equinos {% endblock %}
+
+{% load bootstrap %}
+
+{% block main %}
+
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark fixed-top">
+      <div class="container-fluid">
+            
+        <!-- logo -->
+        <a href="{% url 'home' %}" class="navbar-brand text-light">Wound Web</a>
+
+         <!-- Menu hamburguer -->
+
+        <button class="navbar-toggler" data-toggle="collapse" data-target="#nav-target">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- navegação -->
+        <div class="collapse navbar-collapse" id="nav-target">
+            <ul class="navbar-nav ml-auto">
+            {% if user.is_authenticated %}
+                <li class="nav-item mr-3">
+                    <a href="#" class="nav-link">Olá {{ user.first_name }}</a>
+                </li>
+                <li class="nav-item mr-3">
+                    <a href="{% url 'logout' %}" class="nav-link">Logout</a>
+                </li>
+            {% else %}
+                <li class="nav-item mr-3">
+                    <a href="{% url 'login' %}" class="nav-link">Login</a>
+                </li>
+            {% endif %}
+            <li class="nav-item mr-3">
+                <a href="{% url 'list_bovinos' %}" class="nav-link">Bovinos</a>
+            </li>
+            <li class="nav-item mr-3">
+                <a href="{% url 'list_equinos' %}" class="nav-link">Equinos</a>
+            </li>
+           </ul>
+        </div>
+
+      </div><!-- /.container-->
+    </nav> <!-- / barra de navegação -->
+
+<div class="container-fluid mt-5 pt-5" style="background-image: url({%  static 'imagens/background-animais-cad.jpg' %}); height: 100%">
+        <div class="card col-md-8 offset-md-2 mb-5 shadow-lg" style="border-radius: 20px">
+            <h1 class="title display-3 offset-md-2 card-title pt-3">Cadastro de Equinos</h1>
+            <div class="card-body">
+            <form method="POST">
+                <div class="form-group">
+                        {% csrf_token %}
+
+                        <div class="form-group">
+                            <div class="col-md-10 offset-md-1">
+                            <label class="col-form-label">Nome do animal</label>
+                            {{ form.nome_do_animal }}
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-10 offset-md-1">
+                                <label class="col-form-label">Numeração do animal</label>
+                                {{ form.numeracao_do_animal }}
+                                {{ form.numeracao_do_animal.errors }}
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-10 offset-md-1">
+                                <label class="col-form-label">Peso em Kg</label>
+                                {{ form.peso_do_animal }}
+                            </div>
+                        </div>
+
+                        <div class="col-md-11 offset-md-1 pt-3">
+                            <div class="form-group form-inline">      
+                                <label class="col-form-label pr-3">Anos</label>
+                                {{ form.anos }}
+                                <label class="col-form-label pr-2 pl-3">Meses  </label>
+                                {{ form.meses }}
+                            </div>
+                        </div>
+
+                        <div class="col-md-11 offset-md-1 pt-3">
+                            <div class="form-group form-inline">
+                                <label class="col-form-label pr-3">Raça</label>
+                                {{ form.raca_do_animal }}
+                                <label class="col-form-label pr-3 pl-4">Sexo</label>
+                                {{ form.sexo_do_animal }}
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-10 offset-md-1" style="margin-top: 50px">
+                             <button type="submit" class="btn btn-primary btn-block button">Salvar</button>
+                        </div>                   
+                </div>
+
+                </form>
+                </div>
+            </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+<script src="{% static 'js/bootstrap.js' %}"></script>
+
+{% endblock %}

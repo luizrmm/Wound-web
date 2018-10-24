@@ -1,39 +1,111 @@
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html>
-<head>
-  <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}"/>
-  <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" />
-  <link href="{% static 'css/ct-paper.css' %}" rel="stylesheet"/>
-  <link href="{% static 'css/demo.css' %}" rel="stylesheet" /> 
-  <link href="{% static 'css/examples.css' %}" rel="stylesheet" /> 
-      
-  <!--     Fonts and icons     -->
 
+{% block title %} Calcular àrea {% endblock %}
 
-  <title>imagem</title>
-</head>
-  <body>
-    <div id="teste">
-      <div id="drawingTools">
-        <div id="otherTools">
-          <button class="btn btn-default" id="openFile" onclick="triggerClick()">Abrir</button>
-          <button class="btn btn-default" id="iniciar" onclick="changeColor('red')">Contornar</button>
-          <button class="btn btn-default" id="calibrate">Calibrar</button>
-          <button class="btn btn-default" id="clearCanvas" onclick="clearCanvas()">Limpar</button>
-          <a class="btn btn-default" id="downloadLnk" download="imagem.png">Salvar imagem</a>
-          <a href="{% url 'cadastro_medida' %}" class="btn">Salvar Medida</a>
+{% block main %}
+ <nav class="navbar navbar-expand-sm navbar-dark bg-dark fixed-top">
+      <div class="container-fluid">
+            
+        <!-- logo -->
+        <a href="{% url 'home' %}" class="navbar-brand text-light">Wound Web</a>
+
+         <!-- Menu hamburguer -->
+
+        <button class="navbar-toggler" data-toggle="collapse" data-target="#nav-target">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- navegação -->
+        <div class="collapse navbar-collapse" id="nav-target">
+            <ul class="navbar-nav ml-auto">
+            {% if user.is_authenticated %}
+                <li class="nav-item mr-3">
+                    <a href="#" class="nav-link">Olá {{ user.first_name }}</a>
+                </li>
+                <li class="nav-item mr-3">
+                    <a href="{% url 'logout' %}" class="nav-link">Logout</a>
+                </li>
+            {% else %}
+                <li class="nav-item mr-3">
+                    <a href="{% url 'login' %}" class="nav-link">Login</a>
+                </li>
+            {% endif %}
+            <li class="nav-item mr-3">
+                <a href="{% url 'list_bovinos' %}" class="nav-link">Bovinos</a>
+            </li>
+            <li class="nav-item mr-3">
+                <a href="{% url 'list_equinos' %}" class="nav-link">Equinos</a>
+            </li>
+           </ul>
         </div>
-      </div>
 
-        <canvas id="canvas" width="800" height="500" ondblclick="pegaPosicaoMouse(event)"></canvas>
-        
-        
-        
-      <input id="file" type="file" accept="image/*"/>
+      </div><!-- /.container-->
+    </nav>
+
+
+<div class="canvas_div" style="background-image: url({% static 'imagens/canvas_background.jpg' %});">
+	<div class="container-fluid">
+		<div class="btn-group offset-sm-3 mb-3 pl-sm-5">
+			<button class="btn btn-light" id="openFile" onclick="triggerClick()">Abrir</button>
+			<button class="btn btn-light" id="iniciar" onclick="start();">Contornar</button>
+			<button class="btn btn-light" id="calibrate">Calibrar</button>
+			<a href="{% url 'paint_image' %}" class="btn btn-light">Limpar</a>
+			<a class="btn btn-light" id="downloadLnk" download="imagem.png">Salvar imagem</a>
+			<button type="button" class="btn btn-light" data-toggle="modal" data-target="#myModal">Salvar Medida</button>
+		</div>
+	</div>
+	
+	<div>
+		<canvas id="canvas" width="800" height="500" ondblclick="pegaPosicaoMouse(event)"></canvas>
+	</div>
+	<input id="file" type="file" accept="image/*"/>
+</div>
+
+<!-- MODAL -->
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title">Selecione a espécie</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+            <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <img class="card-img-top" src="{% static 'imagens/vaca-card.jpg' %}">
+                    <div class="card-body">
+                        <a href="{% url 'cadastro_medida_bovino' %}" class="btn btn-outline-primary btn-lg">Bovino</a>
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="card">
+                    <img class="card-img-top" src="{% static 'imagens/horse-card2.jpg' %}">
+                    <div class="card-body">
+                        <a href="{% url 'cadastro_medida_equino' %}" class="btn btn-outline-primary btn-lg">Equino</a>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
     </div>
-     
-    <script type="text/javascript" src="{% static 'js/calculateArea.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/paint.js' %}"></script>
-  </body>
-</html>
+        </div>
+        
+      </div>
+      
+    </div>
+  </div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+<script src="{% static 'js/bootstrap.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/calculateArea.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/paint.js' %}"></script>
+{% endblock %}

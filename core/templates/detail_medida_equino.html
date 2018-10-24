@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Detalhes da medida {% endblock %}
+
+{% block main %}
+
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark fixed-top">
+      <div class="container-fluid">
+            
+        <!-- logo -->
+        <a href="{% url 'home' %}" class="navbar-brand text-light">Wound Web</a>
+
+         <!-- Menu hamburguer -->
+
+        <button class="navbar-toggler" data-toggle="collapse" data-target="#nav-target">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- navegação -->
+        <div class="collapse navbar-collapse" id="nav-target">
+            <ul class="navbar-nav ml-auto">
+            {% if user.is_authenticated %}
+                <li class="nav-item mr-3">
+                    <a href="#" class="nav-link">Olá {{ user.first_name }}</a>
+                </li>
+                <li class="nav-item mr-3">
+                    <a href="{% url 'logout' %}" class="nav-link">Logout</a>
+                </li>
+            {% else %}
+                <li class="nav-item mr-3">
+                    <a href="{% url 'login' %}" class="nav-link">Login</a>
+                </li>
+            {% endif %}
+            <li class="nav-item mr-3">
+                <a href="{% url 'list_bovinos' %}" class="nav-link">Bovinos</a>
+            </li>
+            <li class="nav-item mr-3">
+                <a href="{% url 'list_equinos' %}" class="nav-link">Equinos</a>
+            </li>
+           </ul>
+        </div>
+
+      </div><!-- /.container-->
+    </nav> <!-- / barra de navegação -->
+<div class="background-card" style="background-image: url({% static 'imagens/background-animais-cad.jpg' %});height:100%; padding-top: 80px;">
+    <div class="card col-md-6 offset-md-3 mb-5" style="border-radius: 15px">
+        <div class="card-body">
+        	<h4 class="card-title">Detalhes da Medida</h4>
+          	<p><b class="text-info">Animal:</b> {{ medida_equino.animal_da_medida }}</p>
+			<p><b class="text-info">Data da Medida:</b> {{ medida_equino.data_medida }}</p>
+			<p><b class="text-info">Medida obtida:</b> {{ medida_equino.medida_obtida }} cm²</p>
+			<p><b class="text-info">Tipo da Ferida:</b> {{ medida_equino.tipo_ferida }}</p>
+			<p><b class="text-info">Local da ferida:</b> {{ medida_equino.local_ferida }}</p>
+			<p><b class="text-info">Observações:</b> {{ medida_equino.observacoes }}</p>
+			<h4 class="text-info">Imagem:</h4><img src="{{ medida_equino.image.url }}" style="max-width: 610px;">
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+<script src="{% static 'js/bootstrap.js' %}"></script>
+{% endblock %}
