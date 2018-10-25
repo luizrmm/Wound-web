@@ -21,7 +21,7 @@ class EquinoForm(ModelForm):
 		widgets = {
 			'nome_do_animal': forms.TextInput(attrs={'class': 'form-control'}),
 			'numeracao_do_animal': forms.TextInput(attrs={'class': 'form-control', 'type': 'number'}),
-			'peso_do_animal': forms.TextInput(attrs={'class': 'form-control', 'type': 'number'}),
+			'peso_do_animal': forms.TextInput(attrs={'class': 'form-control'}),
 			'anos': forms.TextInput(attrs={'class': 'form-control', 'type': 'number'}),
 			'meses': forms.TextInput(attrs={'class': 'form-control', 'type': 'number'}),
 			'sexo_do_animal': forms.Select(attrs={'class': 'form-control'}),
@@ -52,7 +52,7 @@ class BovinoForm(ModelForm):
 		widgets = {
 			'nome_do_animal': forms.TextInput(attrs={'class': 'form-control'}),
 			'numeracao_do_animal': forms.TextInput(attrs={'class': 'form-control', 'type': 'number'}),
-			'peso_do_animal': forms.TextInput(attrs={'class': 'form-control', 'type': 'number'}),
+			'peso_do_animal': forms.TextInput(attrs={'class': 'form-control'}),
 			'anos': forms.TextInput(attrs={'class': 'form-control', 'type': 'number'}),
 			'meses': forms.TextInput(attrs={'class': 'form-control', 'type': 'number'}),
 			'sexo_do_animal': forms.Select(attrs={'class': 'form-control'}),
