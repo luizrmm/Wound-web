@@ -3,6 +3,7 @@ from .forms import RegistrationForm, EquinoForm, BovinoForm, EquinoImagemForm, B
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout, authenticate, login
 from .models import Bovino, Equino, MedidaEquino, MedidaBovino
+from django.contrib import messages
 
 #view para o documento html de home
 def home(request):
@@ -40,18 +41,26 @@ def list_medidasBovinos(request, id):
 #view de cadastro de usuário
 def cadastro(request):
 	form = RegistrationForm(request.POST or None)
-	if form.is_valid():
-		form.save()
-		return redirect('home')
+	if request.method == "POST":
+		if form.is_valid():
+			form.save()
+			messages.success(request, 'Usuário cadatrado com sucesso, faça seu login!')
+			return redirect('home')
+		else:
+			messages.error(request, "Algo de inesperado ocorreu, por favor verifique todos os campos.")
 	return render(request, 'cadastro.html', {'form': form})
 
 #view que faz o cadastro de bovinos
 @login_required
 def cadastroBovino(request):
 	form = BovinoForm(request.POST or None)
-	if form.is_valid():
-		form.save()
-		return redirect('home')
+	if request.method == "POST":
+		if form.is_valid():
+			form.save()
+			messages.success(request, 'Bovino cadastrado com sucesso')
+			return redirect('home')
+		else:
+			messages.error(request, "Algo de inesperado ocorreu, por favor verifique todos os campos.")
 	return render(request, 'cadastro_bovino.html', {'form': form})
 
 #view que faz o cadastro de equinos

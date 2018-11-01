@@ -127,9 +127,9 @@ class EquinoImagemForm(ModelForm):
 class RegistrationForm (UserCreationForm):
 	email = forms.EmailField(required=True)
 
-	password1 = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control'}))
-	password2 = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control'}))
-	email = forms.CharField(widget=forms.EmailInput(attrs={'class': 'form-control'}))
+	password1 = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Deve conter números e letras'}))
+	password2 = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Repita sua senha'}))
+	email = forms.CharField(widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Insira seu email'}))
 
 
 	class Meta:
@@ -144,9 +144,9 @@ class RegistrationForm (UserCreationForm):
 		]
 
 		widgets = {
-			'username': forms.TextInput(attrs={'class': 'form-control'}),
-			'first_name': forms.TextInput(attrs={'class': 'form-control'}),
-			'last_name': forms.TextInput(attrs={'class': 'form-control'})
+			'username': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Insira seu nome de usuário'}),
+			'first_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Insria seu nome'}),
+			'last_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Insira seu sobrenome'})
 		}
 
 	def save(self, commit=True):

@@ -49,8 +49,16 @@
         
         <h1 class="display-1 text-white" style="padding: 130px 0px 40px 150px">Wound Web</h1>
         <a href="{% url 'especie_animal' %}" class="btn btn-light button" style="margin-left: 150px">Cadastrar animais</a>
-        <a href="{% url 'paint_image' %}" class="btn btn-light ml-2 button">Calcular área da mancha</a>
+        <a href="{% url 'paint_image' %}" class="btn btn-light ml-2 button">Calcular área da ferida</a>
     </div>
+{% for message in messages %}
+     <div class="alert {{ message.tags }} alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+         {{ message }}
+     </div>
+{% endfor %}
 
     <div class="container-fluid mt-5 mb-4">
        <h1 class="text-gray-dark text-center display-4">Vamos falar sobre o Wound Web</h1>

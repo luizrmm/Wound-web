@@ -42,7 +42,7 @@
 
       </div><!-- /.container-->
     </nav> <!-- / barra de navegação -->
-<div class="background-card" style="background-image: url({% static 'imagens/background-animais-cad.jpg' %});height:100%; padding-top: 80px;">
+<div class="background-card" style="background-image: url({% static 'imagens/background-animais-cad.jpg' %});height:100vh; padding-top: 80px;">
     <div class="card col-md-6 offset-md-3 mb-5" style="border-radius: 15px">
         <div class="card-body">
         	<h4 class="card-title">Detalhes da Medida</h4>
@@ -52,7 +52,9 @@
 			<p><b class="text-info">Tipo da Ferida:</b> {{ medida_bovino.tipo_ferida }}</p>
 			<p><b class="text-info">Local da ferida:</b> {{ medida_bovino.local_ferida }}</p>
 			<p><b class="text-info">Observações:</b> {{ medida_bovino.observacoes }}</p>
-			<h4 class="text-info">Imagem:</h4><img src="{{ medida_bovino.image.url }}" style="max-width: 610px;">
+            {% if medida_bovino.image %}
+			     <h4 class="text-info">Imagem:</h4><img src="{{ medida_bovino.image.url }}" style="max-width: 610px;">
+            {% endif %}
         </div>
     </div>
 </div>
