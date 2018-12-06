@@ -4,6 +4,9 @@ context.lineWidth = 2;
 context.strokeStyle = "#FF0000";
 var down = false;
 context.fillStyle="#FF0000";
+
+var cPushArray = new Array();
+var cStep = -1;
 ////////////////////////////////////////////////
 
 rect = {},
@@ -11,6 +14,7 @@ drag = false;
 
 function draw() {
   context.fillRect(rect.startX, rect.startY, rect.w, rect.h);
+
 }
 
 function mouseDown(e) {
@@ -21,6 +25,8 @@ function mouseDown(e) {
 
 function mouseUp() {
   drag = false;
+  cPush();
+	
 }
 
 function mouseMove(e) {
@@ -56,7 +62,7 @@ function start(){
 		canvas.addEventListener("mousemove", draw);
 	});
 
-	canvas.addEventListener('mouseup', function(){ down = false; });
+	canvas.addEventListener('mouseup', function(){ down = false; cPush(); });
 
 	function draw(e)
 	{
@@ -70,6 +76,28 @@ function start(){
 		}
 
 	}
+}
+
+function cPush() {
+    cStep++;
+    if (cStep < cPushArray.length) { cPushArray.length = cStep; }
+    cPushArray.push(document.getElementById('canvas').toDataURL());
+}
+function cUndo() {
+    if (cStep > 0) {
+        cStep--;
+        var canvasPic = new Image();
+        canvasPic.src = cPushArray[cStep];
+        canvasPic.onload = function () { context.drawImage(canvasPic, 0, 0); }
+    }
+}
+function cRedo() {
+    if (cStep < cPushArray.length-1) {
+        cStep++;
+        var canvasPic = new Image();
+        canvasPic.src = cPushArray[cStep];
+        canvasPic.onload = function () { context.drawImage(canvasPic, 0, 0); }
+    }
 }
 
 function clearCanvas() { context.clearRect(0, 0, canvas.width, canvas.height); }
@@ -117,6 +145,7 @@ document.getElementById('file').addEventListener('change', function(e)
 
 
 		context.drawImage(image, 0, 0, newImageWidth, newImageHeight);
+		cPush();
 		URL.revokeObjectURL(temp);
 	});
 });

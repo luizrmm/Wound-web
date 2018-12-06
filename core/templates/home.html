@@ -34,10 +34,10 @@
                 </li>
             {% endif %}
             <li class="nav-item mr-3">
-                <a href="{% url 'list_bovinos' %}" class="nav-link">Bovinos</a>
+                <a href="{% url 'list_animais' %}" class="nav-link">Lista de animais</a>
             </li>
-            <li class="nav-item mr-3">
-                <a href="{% url 'list_equinos' %}" class="nav-link">Equinos</a>
+               <li class="nav-item mr-3">
+                <a class="nav-link" href="{% url 'admin:index' %}">Administração</a>
             </li>
            </ul>
         </div>
@@ -45,13 +45,14 @@
       </div><!-- /.container-->
     </nav> <!-- / barra de navegação -->
             
-    <div style="min-height: 380px; background-image: url({% static 'imagens/vaca_home.jpg' %})">
+    <div class="heading-page" style="background-image: url({% static 'imagens/vaca_home.jpg' %})">
         
         <h1 class="display-1 text-white" style="padding: 130px 0px 40px 150px">Wound Web</h1>
-        <a href="{% url 'especie_animal' %}" class="btn btn-light button" style="margin-left: 150px">Cadastrar animais</a>
+        <a href="{% url 'cadastro_animal' %}" class="btn btn-light button" style="margin-left: 150px">Cadastrar animais</a>
         <a href="{% url 'paint_image' %}" class="btn btn-light ml-2 button">Calcular área da ferida</a>
     </div>
 {% for message in messages %}
+
      <div class="alert {{ message.tags }} alert-dismissible" role="alert">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
@@ -60,54 +61,67 @@
      </div>
 {% endfor %}
 
-    <div class="container-fluid mt-5 mb-4">
+    <div class="container-fluid mt-5">
        <h1 class="text-gray-dark text-center display-4">Vamos falar sobre o Wound Web</h1>
 
-       <div class="text-justify p-5">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis eu metus sagittis, congue velit eu, suscipit libero. Vestibulum lacinia, dui euismod pretium tempor, sem sem blandit urna, ut eleifend velit lorem id ante. Cras quis libero at quam malesuada sodales id eu dui. Pellentesque accumsan ex mauris, nec consectetur justo lobortis in. Proin viverra, turpis eget fermentum convallis, magna justo mattis nibh, non finibus nisl tortor vitae tellus. Pellentesque facilisis, nisl eget egestas fermentum, nisi lacus viverra mauris, non posuere nulla sapien eu purus. Pellentesque odio leo, interdum nec sem at, imperdiet tincidunt dolor. Suspendisse pellentesque mattis ligula vel vestibulum. Ut nec egestas magna. Nullam porttitor scelerisque turpis, ut consectetur eros gravida ut. In interdum magna scelerisque semper gravida. Vestibulum vel lorem et quam suscipit cursus vitae sit amet elit. Maecenas blandit dui libero, vitae tempor lorem lobortis sed. Donec ut nisl at sapien ultrices lacinia.</p>
+        <div class="text-justify p-5">
+            <p style="font-size: larger;">Wound web é uma ferramenta web voltada especialmente para o cálculo da área
+            de feridas em animais, visando sempre a facilidade de utilização e maior 
+            precisao possivel, contando também com um espaço para o armazenamento e 
+            manipulação dos dados dos animais e medidas realizadas, com a possibilidade
+            exportação dos dados em planilhas e documentos PDF.</p>
+
+            <p style="font-size: larger;">Seu objetivo é auxiliar veterinários e produtores nas mensurações da área de feridas
+            causadas pela alta exposição aos raios ultra violetas, possibilitando assim a constatação da eficácia do
+        tratamento utilizado e sua evolução ao decorrer do tempo.<p>
         </div>
     </div>
 
-    <div class="container-fluid" style="background-color: #004d40">
-          <h1 class="text-light text-center display-4 pt-5">Vamos falar sobre os colaboradores</h1>
-          <div class="row">
-               <div class="col-md-4 pt-5 pb-5">
-            <div class="card">
-                <img class="card-img-top" src="https://images.unsplash.com/photo-1535982330050-f1c2fb79ff78?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=300&h=160&fit=crop&ixid=eyJhcHBfaWQiOjF9&s=70124995344de54a8251fb05aa50346a
-">
-                <div class="card-body">
-                    <h4 class="card-title">Título do cartão</h4>
-                    <h6 class="card-subtitle">Subtítulo do cartão</h6>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis eu metus sagittis, congue velit eu, suscipit libero. Vestibulum lacinia, dui euismod pretium tempor, sem sem blandit urna, ut eleifend velit lorem id ante.</p>
-                    <a class="btn btn-outline-primary" href="">Leia mais</a>
+    <div style="margin: 0;">
+         <h1 class="text-dark text-center display-4 pt-5">Vamos falar sobre os colaboradores</h1>
+          <!-- TESTE -->
+        <div class="colaboradores">
+           
+          <div class="caixa">
+              <div class="box">
+                <div class="imgBox">
+                    <img src="{% static 'imagens/luiz.jpg' %}">
                 </div>
-            </div>
-        </div>
-         <div class="col-md-4 pt-5 pb-5">
-            <div class="card">
-                <img class="card-img-top" src="https://images.unsplash.com/photo-1536599018102-9f803c140fc1?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=300&h=160&fit=crop&ixid=eyJhcHBfaWQiOjF9&s=352723b0ba1a93a954587ba4fa91a804">
-                <div class="card-body">
-                    <h4 class="card-title">Título do cartão</h4>
-                    <h6 class="card-subtitle">Subtítulo do cartão</h6>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis eu metus sagittis, congue velit eu, suscipit libero. Vestibulum lacinia, dui euismod pretium tempor, sem sem blandit urna, ut eleifend velit lorem id ante.</p>
-                    <a class="btn btn-outline-primary" href="">Leia mais</a>
+                <p>Wound web é uma ferramenta web voltada especialmente para o cálculo da área de feridas em animais, visando sempre a facilidade de utilização e maior precisao possivel, contando também com um espaço para o armazenamento e manipulação dos dados dos animais e medidas realizadas, com a possibilidade exportação dos dados em planilhas e documentos PDF.</p>
+                <h4>Someone Famous<br><span>Creative Director</span></h4>
+              </div>
+               <div class="box">
+                <div class="imgBox">
+                    <img src="{% static 'imagens/luiz.jpg' %}">
                 </div>
-            </div>
-        </div>
-         <div class="col-md-4 pt-5 pb-5">
-            <div class="card">
-                <img class="card-img-top" src="https://source.unsplash.com/random/300x160">
-                <div class="card-body">
-                    <h4 class="card-title">Título do cartão</h4>
-                    <h6 class="card-subtitle">Subtítulo do cartão</h6>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis eu metus sagittis, congue velit eu, suscipit libero. Vestibulum lacinia, dui euismod pretium tempor, sem sem blandit urna, ut eleifend velit lorem id ante.</p>
-                    <a class="btn btn-outline-primary" href="">Leia mais</a>
+                <p>Wound web é uma ferramenta web voltada especialmente para o cálculo da área de feridas em animais, visando sempre a facilidade de utilização e maior precisao possivel, contando também com um espaço para o armazenamento e manipulação dos dados dos animais e medidas realizadas, com a possibilidade exportação dos dados em planilhas e documentos PDF.</p>
+                <h4>Someone Famous<br><span>Creative Director</span></h4>
+              </div>
+              <div class="box">
+                <div class="imgBox">
+                    <img src="{% static 'imagens/luiz.jpg' %}">
                 </div>
-            </div>
-        </div>
+                <p>Wound web é uma ferramenta web voltada especialmente para o cálculo da área de feridas em animais, visando sempre a facilidade de utilização e maior precisao possivel, contando também com um espaço para o armazenamento e manipulação dos dados dos animais e medidas realizadas, com a possibilidade exportação dos dados em planilhas e documentos PDF.</p>
+                <h4>Someone Famous<br><span>Creative Director</span></h4>
+              </div>
+              <div class="box">
+                <div class="imgBox">
+                    <img src="{% static 'imagens/luiz.jpg' %}">
+                </div>
+                <p>Wound web é uma ferramenta web voltada especialmente para o cálculo da área de feridas em animais, visando sempre a facilidade de utilização e maior precisao possivel, contando também com um espaço para o armazenamento e manipulação dos dados dos animais e medidas realizadas, com a possibilidade exportação dos dados em planilhas e documentos PDF.</p>
+                <h4>Someone Famous<br><span>Creative Director</span></h4>
+              </div>
+              <div class="box">
+                <div class="imgBox">
+                    <img src="{% static 'imagens/luiz.jpg' %}">
+                </div>
+                <p>Wound web é uma ferramenta web voltada especialmente para o cálculo da área de feridas em animais, visando sempre a facilidade de utilização e maior precisao possivel, contando também com um espaço para o armazenamento e manipulação dos dados dos animais e medidas realizadas, com a possibilidade exportação dos dados em planilhas e documentos PDF.</p>
+                <h4>Someone Famous<br><span>Creative Director</span></h4>
+              </div>
           </div>
+       
 
-
+          </div>
     </div>
 
     <footer class="pt-4 pb-2 bg-dark">

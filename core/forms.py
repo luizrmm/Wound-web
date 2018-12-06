@@ -1,20 +1,22 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-from .models import Equino, Bovino, SexoAnimal, MedidaBovino, MedidaEquino, RacaBovino, RacaEquino
+from .models import Animal, SexoAnimal, MedidaAnimal, TipoFerida, Especie
 from django.forms import ModelForm
 
-class EquinoForm(ModelForm):
+
+class AnimalForm(ModelForm):
 
 	class Meta:
-		model = Equino
+		model = Animal
 		fields = [
 			'nome_do_animal',
 			'numeracao_do_animal',
 			'peso_do_animal',
+			'especie',
+			'raca',
 			'anos',
 			'meses',
-			'raca_do_animal',
 			'sexo_do_animal'
 		]
 
@@ -22,42 +24,11 @@ class EquinoForm(ModelForm):
 			'nome_do_animal': forms.TextInput(attrs={'class': 'form-control'}),
 			'numeracao_do_animal': forms.TextInput(attrs={'class': 'form-control', 'type': 'number'}),
 			'peso_do_animal': forms.NumberInput(attrs={'class': 'form-control'}),
+			'especie': forms.Select(attrs={'class': 'form-control'}),
+			'raca': forms.TextInput(attrs={'class': 'form-control'}),
 			'anos': forms.TextInput(attrs={'class': 'form-control', 'type': 'number'}),
 			'meses': forms.TextInput(attrs={'class': 'form-control', 'type': 'number'}),
-			'sexo_do_animal': forms.Select(attrs={'class': 'form-control'}),
-			'numeracao_do_animal': forms.TextInput(attrs={'class': 'form-control'}),
-			'raca_do_animal': forms.Select(attrs={'class': 'form-control'})
-		}
-		
-		error_messages = {
-			'numeracao_do_animal': {
-				'unique': 'Numeração já existente'
-			},
-		}
-
-class BovinoForm(ModelForm):
-
-	class Meta:
-		model = Bovino
-		fields = [
-			'nome_do_animal',
-			'numeracao_do_animal',
-			'peso_do_animal',
-			'anos',
-			'meses',
-			'raca_do_animal',
-			'sexo_do_animal'
-		]
-
-		widgets = {
-			'nome_do_animal': forms.TextInput(attrs={'class': 'form-control'}),
-			'numeracao_do_animal': forms.TextInput(attrs={'class': 'form-control', 'type': 'number'}),
-			'peso_do_animal': forms.NumberInput(attrs={'class': 'form-control'}),
-			'anos': forms.TextInput(attrs={'class': 'form-control', 'type': 'number'}),
-			'meses': forms.TextInput(attrs={'class': 'form-control', 'type': 'number'}),
-			'sexo_do_animal': forms.Select(attrs={'class': 'form-control'}),
-			'numeracao_do_animal': forms.TextInput(attrs={'class': 'form-control'}),
-			'raca_do_animal': forms.Select(attrs={'class': 'form-control'})
+			'sexo_do_animal': forms.Select(attrs={'class': 'form-control'})
 		}
 
 		error_messages = {
@@ -67,14 +38,10 @@ class BovinoForm(ModelForm):
 		}
 
 
-
-
-
-
-class BovinoImagemForm(ModelForm):
+class MedidaForm(ModelForm):
 
 	class Meta:
-		model = MedidaBovino
+		model = MedidaAnimal
 		fields = [
 			'data_medida',
 			'image',
@@ -94,33 +61,6 @@ class BovinoImagemForm(ModelForm):
 			'local_ferida': forms.TextInput(attrs={'class': 'form-control'}),
 			'observacoes': forms.Textarea(attrs={'class': 'form-control'})
 		}
-
-
-class EquinoImagemForm(ModelForm):
-	
-
-	class Meta:
-		model = MedidaEquino
-		fields = [
-			'data_medida',
-			'image',
-			'medida_obtida',
-			'tipo_ferida',
-			'animal_da_medida',
-			'local_ferida',
-			'observacoes'
-		]
-
-		widgets = {
-			'data_medida': forms.TextInput(attrs={'class': 'form-control', 'type': 'date'}),
-			'animal_da_medida': forms.Select(attrs={'class': 'form-control'}),
-			'image': forms.FileInput(attrs={'class': 'form-control'}),
-			'medida_obtida': forms.NumberInput(attrs={'class': 'form-control'}),
-			'tipo_ferida': forms.Select(attrs={'class': 'form-control'}),
-			'local_ferida': forms.TextInput(attrs={'class': 'form-control'}),
-			'observacoes': forms.Textarea(attrs={'class': 'form-control'})
-		}
-
 
 
 

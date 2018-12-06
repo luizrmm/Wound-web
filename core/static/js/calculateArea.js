@@ -12,8 +12,10 @@ document.getElementById('calibrate').onclick = function () {
 	return flag
 }
 
+var medidas = []
 /*função que pinta o interior da figura e calcula a area com base em pixels*/
 function pintar(x, y){
+	
 	contp = 0
 	//vetor de movimento, movimenta em relação aos 4 vizinhos do pixel
 	var movimentar_x = [1, -1, 0, 0]
@@ -50,6 +52,18 @@ function pintar(x, y){
 	}
 		res = (parseFloat(contp)/parseFloat(cont))
 		alert ("Area em cm²: " + res.toFixed(2))
+		var x = res.toFixed(2)
+		res = parseFloat(x)
+		medidas.push(res)
+		
+		var sum = medidas.reduce(myfunction)
+
+		function myfunction(total, value, index, array) {
+    		return total + value;
+		}
+		console.log(sum)
+
+		document.getElementById('id_medida_obtida').value = sum
 }
 
 
@@ -103,7 +117,9 @@ function pegaPosicaoMouse(event){
 		calibrar(pos_x, pos_y)
 	}
 	else{
-		pintar(pos_x, pos_y)
+		document.getElementById("loading").className = "loading-visible";
+		setTimeout(function(){ pintar(pos_x, pos_y); 
+			document.getElementById("loading").className = "loading-invisible";} , 20);
 	}
 }
 

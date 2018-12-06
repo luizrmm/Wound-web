@@ -35,10 +35,10 @@
                 </li>
             {% endif %}
            <li class="nav-item mr-3">
-                <a href="{% url 'list_bovinos' %}" class="nav-link">Bovinos</a>
+                <a href="{% url 'list_animais' %}" class="nav-link">Lista de animais</a>
             </li>
-            <li class="nav-item mr-3">
-                <a href="{% url 'list_equinos' %}" class="nav-link">Equinos</a>
+               <li class="nav-item mr-3">
+                <a class="nav-link" href="{% url 'admin:index' %}">Administração</a>
             </li>
         </ul>
         </div>
@@ -48,7 +48,7 @@
 
 <div class="container-fluid mt-5 pt-5" style="background-image: url({%  static 'imagens/background-animais-cad.jpg' %}); height: 100%">
         <div class="card col-md-8 offset-md-2 mb-5 shadow-lg" style="border-radius: 20px">
-            <h1 class="title display-3 offset-md-2 card-title pt-3">Cadastro de Bovinos</h1>
+            <h1 class="title display-3 offset-md-2 card-title pt-3">Cadastro de Animais</h1>
              {% for message in messages %}
              <div class="alert {{ message.tags }} alert-dismissible" role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -78,9 +78,11 @@
                         </div>
 
                         <div class="form-group">
-                            <div class="col-md-10 offset-md-1">
-                                <label class="col-form-label">Peso em Kg</label>
+                            <div class="col-md-10 offset-md-1 form-inline">
+                                <label class="col-form-label pr-3">Peso em Kg</label>
                                 {{ form.peso_do_animal }}
+                                 <label class="col-form-label pl-4 pr-3">Sexo</label>
+                                {{ form.sexo_do_animal }}
                             </div>
                         </div>
 
@@ -93,18 +95,23 @@
                             </div>
                         </div>
 
-                        <div class="col-md-11 offset-md-1 pt-3">
+                        <div class="col-md-10 offset-md-1 pt-3">
                             <div class="form-group form-inline">
-                                <label class="col-form-label pr-3">Raça</label>
-                                {{ form.raca_do_animal }}
-                                <label class="col-form-label pr-3 pl-4">Sexo</label>
-                                {{ form.sexo_do_animal }}
+                                <label class="col-form-label pr-3">Espécie</label>
+                                {{ form.especie }}
+                                <label class="col-form-label pl-4 pr-3">Raça</label>
+                                {{ form.raca }}
                             </div>
                         </div>
 
 
-                        <div class="col-md-10 offset-md-1" style="margin-top: 50px">
+                        <div class="form-inline" style="margin-top: 50px">
+                            <div class="col-md-6">
                              <button type="submit" class="btn btn-primary btn-block button">Salvar</button>
+                             </div>
+                             <div class="col-md-6">
+                             <a href="{% url 'home' %}" class="mr-3 btn btn-danger btn-block button">Cancelar</a>
+                             </div>
                         </div>                   
                 </div>
 

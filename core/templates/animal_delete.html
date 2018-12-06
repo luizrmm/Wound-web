@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %} Detalhes da medida {% endblock %}
+{% block title %} Deletar Animal{% endblock %}
 
 {% block main %}
 
-<nav class="navbar navbar-expand-sm navbar-dark bg-dark fixed-top">
+ <nav class="navbar navbar-expand-sm navbar-dark bg-dark fixed-top">
       <div class="container-fluid">
             
         <!-- logo -->
@@ -32,29 +32,28 @@
                 </li>
             {% endif %}
             <li class="nav-item mr-3">
-                <a href="{% url 'list_bovinos' %}" class="nav-link">Bovinos</a>
+                <a href="{% url 'list_animais' %}" class="nav-link">Lista de animais</a>
             </li>
-            <li class="nav-item mr-3">
-                <a href="{% url 'list_equinos' %}" class="nav-link">Equinos</a>
+               <li class="nav-item mr-3">
+                <a class="nav-link" href="{% url 'admin:index' %}">Administração</a>
             </li>
            </ul>
         </div>
 
       </div><!-- /.container-->
     </nav> <!-- / barra de navegação -->
-<div class="background-card" style="background-image: url({% static 'imagens/background-animais-cad.jpg' %});height:100vh; padding-top: 80px;">
-    <div class="card col-md-6 offset-md-3 mb-5" style="border-radius: 15px">
+
+<div class="background-card" style="background-image: url({% static 'imagens/background-animais-cad.jpg' %});height:100vh; padding-top: 200px;">
+    <div class="card col-md-6 offset-md-3" style="border-radius: 20px">
         <div class="card-body">
-        	<h4 class="card-title">Detalhes da Medida</h4>
-          	<p><b class="text-info">Animal:</b> {{ medida_equino.animal_da_medida }}</p>
-			<p><b class="text-info">Data da Medida:</b> {{ medida_equino.data_medida }}</p>
-			<p><b class="text-info">Medida obtida:</b> {{ medida_equino.medida_obtida }} cm²</p>
-			<p><b class="text-info">Tipo da Ferida:</b> {{ medida_equino.tipo_ferida }}</p>
-			<p><b class="text-info">Local da ferida:</b> {{ medida_equino.local_ferida }}</p>
-			<p><b class="text-info">Observações:</b> {{ medida_equino.observacoes }}</p>
-            {% if medida_equino.image %}
-			     <h4 class="text-info">Imagem:</h4><img src="{{ medida_equino.image.url }}" style="max-width: 610px;">
-            {% endif %}
+        	<h1 class="display-4">Tem certeza que deseja deletar {{ animal.nome_do_animal }} ?</h1>
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="pt-3">
+                <a href="{% url 'list_animais' %}" class="mr-3 btn btn-info btn-lg">Cancelar</a>
+                <button class="btn btn-danger btn-lg" type="submit">Deletar</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>

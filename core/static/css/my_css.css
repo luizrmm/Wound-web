@@ -39,3 +39,149 @@
 	padding-top: 90px;
 	height: 100vh;
 }
+
+.card-profile{
+	width: 300px; 
+	height:300px; 
+	border-radius: 50%; 
+	margin: 10px 55px;
+}
+
+.heading-page{
+	min-height: 380px;
+	background-repeat: no-repeat; 
+	background-size: 1500px 600px;
+}
+
+.loading-visible{
+	display: block;
+	position:fixed;
+    top: 50%;
+    left: 50%;
+    width:30em;
+    height:18em;
+    margin-top: -9em; /*set to a negative number 1/2 of your height*/
+    margin-left: -15em;
+}
+.loading-invisible{
+	display: none;
+}
+
+.colaboradores{
+	margin: 0;
+	padding: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+    background: #fff;
+}
+.caixa{
+	width: 1200px;
+	margin: 0 auto;
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+	grid-gap: 20px;
+	box-sizing: border-box;
+	padding: 20px;
+}
+.caixa .box{
+	margin-top: 100px;
+	position: relative;
+	padding: 80px 40px 40px;
+	transition: 0.5s;
+	text-align: center;
+	background: #FFEB3B;
+	box-shadow: 0 5px 15px rgba(0, 0, 0, .6);
+
+}
+.caixa .box:hover{
+	background: #105039;
+
+}
+
+.caixa .box p{
+	margin: 0;
+	padding: 0;
+	transition: 0.5s;
+}
+.caixa .box h4{
+	margin: 20px 0 0;
+	padding: 0;
+	transition: 0.5s;
+	font-size: 18px;
+	color: #105039;
+	font-weight: 700;
+	line-height: 20px;
+	text-transform: uppercase;
+}
+
+.caixa .box h4 span{
+	font-weight: 600;
+	font-size: 14px;
+	color: #7C7C73;
+	transition: 0.5s;
+
+}
+
+.caixa .box:hover p,
+.caixa .box:hover h4,
+.caixa .box:hover h4 span{
+	color: #fff;
+}
+
+.caixa .box .imgBox{
+	position: absolute;
+	top: -60px;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 120px;
+	height: 120px;
+	border-radius: 50%;
+	overflow: hidden;
+}
+
+.caixa .box:before{
+	content: '';
+	position: absolute;
+	top: -13px;
+	right: 30px;
+	width: 80px;
+	height: 80px;
+	background: url('/static/imagens/quote.png');
+	background-size: cover;
+	pointer-events: none;
+	opacity: 0.05;
+	transition: 0.5s;
+}
+.caixa .box:hover:before{
+	transform: translateY(-30px);
+	opacity: 1;
+}
+
+.caixa .box:after{
+	content: '';
+	position: absolute;
+	bottom: -10px;
+	left: 30px;
+	width: 80px;
+	height: 80px;
+	background: url('/static/imagens/quote.png');
+	background-size: cover;
+	pointer-events: none;
+	opacity: 0.05;
+	transition: 0.5s;
+	transform: rotate(180deg) translateY(0);
+}
+.caixa .box:hover:after{
+	transform: rotate(180deg) translateY(-30px);
+	opacity: 1;
+}
+@media (max-width: 768px){
+	.caixa .box{
+		margin-top: 60px;
+	}
+}
+.conjunto{
+	left: 18.8%;
+}
+

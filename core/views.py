@@ -1,42 +1,36 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .forms import RegistrationForm, EquinoForm, BovinoForm, EquinoImagemForm, BovinoImagemForm
+from .forms import RegistrationForm, AnimalForm, MedidaForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout, authenticate, login
-from .models import Bovino, Equino, MedidaEquino, MedidaBovino
+from .models import Animal, MedidaAnimal
 from django.contrib import messages
 
 #view para o documento html de home
 def home(request):
 	return render(request, 'home.html')
 
-#view que permite o usuário selecionar a espécie de animal
-def Especie(request):
-	return render(request, 'Especie_animal.html')
-
 #view de cálculo da área
 @login_required
 def paint_image(request):
-	return render(request, 'paint_image.html')
+	form = MedidaForm(request.POST or None, request.FILES or None)
+	if request.method == "POST":
+		if form.is_valid():
+			form.save()
+			messages.success(request, 'Medida salva com sucesso')
+			return redirect('paint_image')
+		else:
+			messages.error(request, "Algo de inesperado ocorreu, por favor verifique todos os campos.")
+	return render(request, 'paint_image.html', {'form': form})
 
 @login_required
-def list_bovinos(request):
-	context = {'Bovinos' : Bovino.objects.all()}
-	return render(request, 'list_bovinos.html', context)
+def list_animais(request):
+	context = {'Animais' : Animal.objects.all()}
+	return render(request, 'list_animais.html', context)
 
 @login_required
-def list_equinos(request):
-	context = {'Equinos': Equino.objects.all()}
-	return render(request, 'list_equinos.html', context)
-
-@login_required
-def list_medidasEquinos(request, id):
-	context = {'MedidasEquino': MedidaEquino.objects.filter(animal_da_medida_id=id)}
-	return render(request, 'list_medidas_equino.html', context)
-
-@login_required
-def list_medidasBovinos(request, id):
-	context = {'MedidasBovino': MedidaBovino.objects.filter(animal_da_medida_id=id)}
-	return render(request, 'list_medidas_bovino.html', context)
+def list_medidas(request, id):
+	context = {'Medidas': MedidaAnimal.objects.filter(animal_da_medida_id=id)}
+	return render(request, 'list_medidas.html', context)
 
 #view de cadastro de usuário
 def cadastro(request):
@@ -50,45 +44,18 @@ def cadastro(request):
 			messages.error(request, "Algo de inesperado ocorreu, por favor verifique todos os campos.")
 	return render(request, 'cadastro.html', {'form': form})
 
-#view que faz o cadastro de bovinos
+
 @login_required
-def cadastroBovino(request):
-	form = BovinoForm(request.POST or None)
+def cadastroAnimal(request):
+	form = AnimalForm(request.POST or None)
 	if request.method == "POST":
 		if form.is_valid():
 			form.save()
-			messages.success(request, 'Bovino cadastrado com sucesso')
+			messages.success(request, 'Animal cadastrado com sucesso')
 			return redirect('home')
 		else:
 			messages.error(request, "Algo de inesperado ocorreu, por favor verifique todos os campos.")
-	return render(request, 'cadastro_bovino.html', {'form': form})
-
-#view que faz o cadastro de equinos
-@login_required
-def cadastroEquino(request):
-	form = EquinoForm(request.POST or None)
-	if form.is_valid():
-		form.save()
-		return redirect('home')
-	return render(request, 'cadastro_equino.html', {'form': form})
-
-#view que permite o cadastro de medias de bovinos
-@login_required
-def cadastroMedidaBovino(request):
-    form = BovinoImagemForm(request.POST or None, request.FILES or None)
-    if form.is_valid():
-        form.save()
-        return redirect('paint_image')
-    return render(request, 'cadastro_medida_bovino.html', {'form': form})
-
-#view que permite o cadastro de medias de equinos
-@login_required
-def cadastroMedidaEquino(request):
-    form = EquinoImagemForm(request.POST or None, request.FILES or None)
-    if form.is_valid():
-        form.save()
-        return redirect('paint_image')
-    return render(request, 'cadastro_medida_equino.html', {'form': form})
+	return render(request, 'cadastro_animal.html', {'form': form})
 
 #view de login
 def my_login(request):
@@ -105,84 +72,46 @@ def my_logout(request):
 	return redirect('home')
 
 
-#view de update dos bovinos
+
 @login_required
-def update_bovino(request, id):
-    bovino = get_object_or_404(Bovino, pk=id)
-    form = BovinoForm(request.POST or None, request.FILES or None, instance=bovino)
+def update_animal(request, id):
+	animal = get_object_or_404(Animal, pk=id)
+	form = AnimalForm(request.POST or None, request.FILES or None, instance=animal)
 
-    if form.is_valid():
-        form.save()
-        return redirect('list_bovinos')
+	if form.is_valid():
+		form.save()
+		return redirect('list_animais')
 
-    return render(request, 'cadastro_bovino.html', {'form': form})
+	return render(request, 'cadastro_animal.html', {'form': form})
 
-
- #view de update dos bovinos
-@login_required
-def update_equino(request, id):
-    equino = get_object_or_404(Equino, pk=id)
-    form = EquinoForm(request.POST or None, request.FILES or None, instance=equino)
-
-    if form.is_valid():
-        form.save()
-        return redirect('list_equinos')
-
-    return render(request, 'cadastro_equino.html', {'form': form})
 
 
 @login_required
-def delete_bovino(request, id):
-	bovino = get_object_or_404(Bovino, pk=id)
-	form = BovinoForm(request.POST or None, request.FILES or None, instance=bovino)
+def delete_animal(request, id):
+	animal = get_object_or_404(Animal, pk=id)
+	form = AnimalForm(request.POST or None, request.FILES or None, instance=animal)
 
 	if request.method == 'POST':
-		bovino.delete()
-		return redirect('list_bovinos')
+		animal.delete()
+		return redirect('list_animais')
 
-	return render(request, 'bovino_delete.html', {'bovino': bovino})
+	return render(request, 'animal_delete.html', {'animal': animal})
+
+@login_required
+def detail_medida(request, id):
+	medida_animal = MedidaAnimal.objects.get(id=id)
+	return render(request, 'detail_medida.html', {'medida_animal': medida_animal})
 
 
 @login_required
-def delete_equino(request, id):
-	equino = get_object_or_404(Equino, pk=id)
-	form = EquinoForm(request.POST or None, request.FILES or None, instance=equino)
+def delete_medida(request, id):
+	medida_animal = MedidaAnimal.objects.get(id=id)
+	form = MedidaForm(request.POST or None, request.FILES or None, instance=medida_animal)
 
 	if request.method == 'POST':
-		equino.delete()
-		return redirect('list_equinos')
+		medida_animal.delete()
+		return redirect('list_animais')
 
-	return render(request, 'equino_delete.html', {'equino': equino})
+	return render(request, 'delete_medida.html', {'medida_animal': medida_animal})
 
-@login_required
-def detail_medida_bovino(request, id):
-	medida_bovino = MedidaBovino.objects.get(id=id)
-	return render(request, 'detail_medida_bovino.html', {'medida_bovino': medida_bovino})
-
-@login_required
-def detail_medida_equino(request, id):
-	medida_equino = MedidaEquino.objects.get(id=id)
-	return render(request, 'detail_medida_equino.html', {'medida_equino': medida_equino})
-
-
-@login_required
-def delete_medida_equino(request, id):
-	medida_equino = MedidaEquino.objects.get(id=id)
-	form = EquinoImagemForm(request.POST or None, request.FILES or None, instance=medida_equino)
-
-	if request.method == 'POST':
-		medida_equino.delete()
-		return redirect('list_equinos')
-
-	return render(request, 'delete_medida_equino.html', {'medida_equino': medida_equino})
-
-@login_required
-def delete_medida_bovino(request, id):
-	medida_bovino = MedidaBovino.objects.get(id=id)
-	form = BovinoImagemForm(request.POST or None, request.FILES or None, instance=medida_bovino)
-
-	if request.method == 'POST':
-		medida_bovino.delete()
-		return redirect('list_bovinos')
-
-	return render(request, 'delete_medida_bovino.html', {'medida_bovino': medida_bovino})
+	
